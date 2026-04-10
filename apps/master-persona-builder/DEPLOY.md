@@ -11,7 +11,7 @@ Deploy this folder as an isolated app:
 
 ## Recommended Security Environment Variables
 - `MPB_ALLOWED_ORIGINS`: comma-separated allowlist, e.g. `https://your-domain.com,https://www.your-domain.com`
-- `MPB_API_KEY`: optional API key for `/api/validate` and `/api/generate`
+- `MPB_API_KEY`: optional API key for `/api/validate` and `/api/generate` (if set, frontend must provide it via the `API Key` input)
 - `MPB_SUBPROCESS_TIMEOUT_SEC`: subprocess timeout per tool step (default: `25`)
 - `MPB_MAX_SOURCE_ITEMS`: max `source_materials` entries (default: `24`)
 - `MPB_MAX_SOURCE_CHARS`: max characters per source item (default: `30000`)
@@ -34,3 +34,4 @@ No Vercel secrets are required for this workflow.
 - Python functions use `/tmp` for temporary files.
 - If root repo tools are available in runtime, `/api/generate` uses them.
 - If not available, `/api/generate` falls back to template-only output.
+- `X-Forwarded-Proto` may be absent in local/self-hosted runtime; same-origin fallback compares host and accepts matching local origin.

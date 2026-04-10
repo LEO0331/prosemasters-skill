@@ -25,6 +25,25 @@ const wikiOut = $("wiki_out");
 const toolPlanOut = $("tool_plan_summary");
 const sourcesList = $("sources_list");
 const execTableBody = $("exec_table").querySelector("tbody");
+const apiKeyInput = $("api_key");
+
+const API_KEY_STORAGE_KEY = "mpb_api_key";
+
+function getApiKey() {
+  const fromInput = (apiKeyInput?.value || "").trim();
+  if (fromInput) return fromInput;
+  return (window.localStorage.getItem(API_KEY_STORAGE_KEY) || "").trim();
+}
+
+function persistApiKey() {
+  if (!apiKeyInput) return;
+  const value = (apiKeyInput.value || "").trim();
+  if (value) {
+    window.localStorage.setItem(API_KEY_STORAGE_KEY, value);
+  } else {
+    window.localStorage.removeItem(API_KEY_STORAGE_KEY);
+  }
+}
 
 function lines(v) {
   return v.split("\n").map((x) => x.trim()).filter(Boolean);
@@ -205,9 +224,12 @@ function applyPayloadToForm(payload) {
 }
 
 async function postJson(path, payload) {
+  const headers = { "Content-Type": "application/json" };
+  const apiKey = getApiKey();
+  if (apiKey) headers["X-API-Key"] = apiKey;
   const r = await fetch(path, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify(payload),
   });
   const data = await r.json();
@@ -284,6 +306,11 @@ $("copy_wiki").onclick = async () => navigator.clipboard.writeText(wikiOut.value
 $("download_skill").onclick = () => download("SKILL.md", skillOut.value || "");
 $("download_wiki").onclick = () => download("wiki.md", wikiOut.value || "");
 $("add_source").onclick = () => sourcesList.appendChild(sourceRow());
+if (apiKeyInput) {
+  apiKeyInput.value = window.localStorage.getItem(API_KEY_STORAGE_KEY) || "";
+  apiKeyInput.addEventListener("change", persistApiKey);
+  apiKeyInput.addEventListener("blur", persistApiKey);
+}
 
 fetch("/shared/examples/master.example.json")
   .then((r) => r.ok ? r.json() : null)

@@ -1,5 +1,9 @@
 # Master Persona Builder (Frontend -> Python API)
 
+[![Vercel Runtime](https://img.shields.io/badge/Vercel-Python%203.12-black)](https://vercel.com)
+[![Security Guardrails](https://img.shields.io/badge/Security-CORS%20%2B%20API%20Key%20%2B%20Limits-0a7f5a)](#notes)
+[![CI](https://img.shields.io/badge/GitHub%20Actions-Security%20%2F%20Test-1f6feb)](../../.github/workflows/deploy-master-persona-builder.yml)
+
 This app is isolated from existing repository functionality.
 
 ## What it does
@@ -39,4 +43,7 @@ Send `source_materials[]` with:
 ## Notes
 - Python functions use `/tmp` for temporary files.
 - If root repo tools are unavailable in runtime, generate falls back to template-only output.
-- Production should set `MPB_ALLOWED_ORIGINS` and (optionally) `MPB_API_KEY` to reduce cross-origin abuse risk.
+- Production should set `MPB_ALLOWED_ORIGINS`.
+- If server sets `MPB_API_KEY`, enter the same key in the UI `API Key` field (stored in browser `localStorage` and sent as `X-API-Key`).
+- Request hardening envs: `MPB_SUBPROCESS_TIMEOUT_SEC`, `MPB_MAX_SOURCE_ITEMS`, `MPB_MAX_SOURCE_CHARS`, `MPB_MAX_TOTAL_SOURCE_CHARS`, `MPB_MAX_BIOGRAPHY_STEPS`.
+- GitHub Actions workflow is security/test only (no deploy): `.github/workflows/deploy-master-persona-builder.yml`.

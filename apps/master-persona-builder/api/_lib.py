@@ -6,15 +6,9 @@ import re
 import secrets
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 SLUG_RE = re.compile(r"^[a-z0-9-]+$")
-
-
-def _env_flag(name: str, default: bool = False) -> bool:
-    raw = os.getenv(name)
-    if raw is None:
-        return default
-    return raw.strip().lower() in {"1", "true", "yes", "on"}
 
 
 def _allowed_origins() -> set[str]:
@@ -32,8 +26,17 @@ def _same_origin(handler: Any, origin: str) -> bool:
     host = str(handler.headers.get("Host", "")).strip()
     if not host:
         return False
-    proto = str(handler.headers.get("X-Forwarded-Proto", "https")).strip() or "https"
-    return origin == f"{proto}://{host}"
+    parsed = urlparse(origin)
+    if not parsed.scheme or not parsed.netloc:
+        return False
+    if parsed.netloc != host:
+        return False
+
+    forwarded_proto = str(handler.headers.get("X-Forwarded-Proto", "")).strip().lower()
+    if not forwarded_proto:
+        # Fallback for local/self-hosted runtimes where this header is absent.
+        return True
+    return parsed.scheme.lower() == forwarded_proto
 
 
 def is_origin_allowed(handler: Any) -> bool:
