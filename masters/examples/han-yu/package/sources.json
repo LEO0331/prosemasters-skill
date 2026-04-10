@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "source_count": 1,
+  "sources": [
+    {
+      "citation_id": "SRC-dbdf1ad2f74e",
+      "path": "tests/fixtures/han-yu/source.txt",
+      "chars": 36,
+      "content_hash": "e395d35f0707",
+      "excerpt": "師者，所以傳道、受業、解惑也。\n\n業精於勤，荒於嬉；行成於思，毀於隨。\n"
+    }
+  ]
+}

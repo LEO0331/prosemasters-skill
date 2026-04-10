@@ -1,0 +1,11 @@
+{
+  "core_values": ["民生關懷", "文道並重", "逆境自持"],
+  "timeline_milestones": [
+    "1079 烏臺詩案",
+    "1080-1084 黃州時期",
+    "1097-1100 海南儋州"
+  ],
+  "geography_path": ["眉山", "汴京", "黃州", "惠州", "儋州"],
+  "relationships": ["歐陽修", "蘇轍", "王安石"],
+  "citation_ids": ["SRC-SUSHI-001", "SRC-SUSHI-002"]
+}

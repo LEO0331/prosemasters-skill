@@ -1,0 +1,17 @@
+# OMX runtime state
+.omx/
+.backups/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Generated runtime skill outputs
+.claude/skills/*
+!.claude/skills/.gitkeep
+
+# Distilled masters (keep curated examples only)
+masters/*
+!masters/.gitkeep
+!masters/examples/
+!masters/examples/**

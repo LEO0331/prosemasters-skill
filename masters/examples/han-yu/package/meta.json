@@ -1,0 +1,24 @@
+{
+  "slug": "han-yu",
+  "name": "韓愈",
+  "dynasty": "中唐",
+  "titles": [
+    "昌黎先生",
+    "吏部侍郎"
+  ],
+  "historical_context": "中唐古文運動核心人物，以文載道、反佛護儒。",
+  "literary_school": "古文運動領袖",
+  "core_philosophy": "道統意識強，文以載道，剛直進諫",
+  "version": "1.0.0",
+  "prompt_contract": [
+    "/Users/Leo/Documents/prosemasters-skill/prompts/intake.md",
+    "/Users/Leo/Documents/prosemasters-skill/prompts/memory_analyzer.md",
+    "/Users/Leo/Documents/prosemasters-skill/prompts/literary_persona_analyzer.md",
+    "/Users/Leo/Documents/prosemasters-skill/prompts/self_builder.md",
+    "/Users/Leo/Documents/prosemasters-skill/prompts/persona_builder.md",
+    "/Users/Leo/Documents/prosemasters-skill/prompts/merger.md",
+    "/Users/Leo/Documents/prosemasters-skill/prompts/critique_handler.md"
+  ],
+  "created_at": "2026-04-10T03:30:41.689561+00:00",
+  "updated_at": "2026-04-10T03:30:41.689622+00:00"
+}
