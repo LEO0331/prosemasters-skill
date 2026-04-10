@@ -14,10 +14,10 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _lib import (
-    is_authorized,
-    is_origin_allowed,
     normalize_payload,
     read_json_body,
+    reject_forbidden_origin,
+    reject_unauthorized,
     render_skill_md,
     render_wiki_md,
     repo_root_from_api_file,
@@ -323,18 +323,15 @@ def _try_generate_with_repo_tools(data: dict, repo_root: Path) -> tuple[dict[str
 
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
-        if not is_origin_allowed(self):
-            send_json(self, 403, {"ok": False, "errors": ["Forbidden origin"]})
+        if reject_forbidden_origin(self):
             return
         send_json(self, 200, {"ok": True})
 
     def do_POST(self):
         try:
-            if not is_origin_allowed(self):
-                send_json(self, 403, {"ok": False, "errors": ["Forbidden origin"]})
+            if reject_forbidden_origin(self):
                 return
-            if not is_authorized(self):
-                send_json(self, 401, {"ok": False, "errors": ["Unauthorized"]})
+            if reject_unauthorized(self):
                 return
             payload = read_json_body(self)
             data = normalize_payload(payload)

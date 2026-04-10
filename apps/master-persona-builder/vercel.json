@@ -1,13 +1,13 @@
 {
   "functions": {
     "api/generate.py": {
-      "runtime": "python3.12"
+      "maxDuration": 30
     },
     "api/validate.py": {
-      "runtime": "python3.12"
+      "maxDuration": 15
     },
     "api/health.py": {
-      "runtime": "python3.12"
+      "maxDuration": 10
     }
   }
 }

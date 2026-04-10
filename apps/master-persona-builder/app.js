@@ -72,11 +72,11 @@ function renderExecutionsTable(toolPlan) {
 
   for (const rec of executions) {
     const tr = document.createElement("tr");
-    const status = rec.status || "unknown";
+    const rowStatus = rec.status || "unknown";
     const statusClass =
-      status === "success"
+      rowStatus === "success"
         ? "status-success"
-        : status === "failed"
+        : rowStatus === "failed"
           ? "status-failed"
           : "status-skipped";
 
@@ -94,7 +94,7 @@ function renderExecutionsTable(toolPlan) {
     tr.innerHTML = `
       <td>${escapeHtml(rec.step || "-")}</td>
       <td>${escapeHtml(rec.tool || "-")}</td>
-      <td><span class="status-pill ${statusClass}">${escapeHtml(status)}</span></td>
+      <td><span class="status-pill ${statusClass}">${escapeHtml(rowStatus)}</span></td>
       <td>${escapeHtml(rec.exit_code ?? "-")}</td>
       <td>${escapeHtml(rec.duration_ms ?? "-")}</td>
       <td>${logsCell}</td>
@@ -232,7 +232,9 @@ async function postJson(path, payload) {
     headers,
     body: JSON.stringify(payload),
   });
-  const data = await r.json();
+  const contentType = (r.headers.get("content-type") || "").toLowerCase();
+  const isJson = contentType.includes("application/json");
+  const data = isJson ? await r.json() : { errors: [await r.text()] };
   if (!r.ok) throw new Error(data.errors ? data.errors.join("; ") : `HTTP ${r.status}`);
   return data;
 }

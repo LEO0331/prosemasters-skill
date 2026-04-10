@@ -1,6 +1,6 @@
 # Master Persona Builder (Frontend -> Python API)
 
-[![Vercel Runtime](https://img.shields.io/badge/Vercel-Python%203.12-black)](https://vercel.com)
+[![Vercel Runtime](https://img.shields.io/badge/Vercel-Python%20Functions-black)](https://vercel.com)
 [![Security Guardrails](https://img.shields.io/badge/Security-CORS%20%2B%20API%20Key%20%2B%20Limits-0a7f5a)](#notes)
 [![CI](https://img.shields.io/badge/GitHub%20Actions-Security%20%2F%20Test-1f6feb)](../../.github/workflows/deploy-master-persona-builder.yml)
 

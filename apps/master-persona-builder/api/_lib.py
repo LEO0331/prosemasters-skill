@@ -61,6 +61,20 @@ def is_authorized(handler: Any) -> bool:
     return bool(provided) and secrets.compare_digest(provided, expected)
 
 
+def reject_forbidden_origin(handler: Any) -> bool:
+    if is_origin_allowed(handler):
+        return False
+    send_json(handler, 403, {"ok": False, "errors": ["Forbidden origin"]})
+    return True
+
+
+def reject_unauthorized(handler: Any) -> bool:
+    if is_authorized(handler):
+        return False
+    send_json(handler, 401, {"ok": False, "errors": ["Unauthorized"]})
+    return True
+
+
 def send_json(handler: Any, status: int, payload: dict[str, Any]) -> None:
     raw = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     origin = _request_origin(handler)
