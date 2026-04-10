@@ -1,0 +1,7 @@
+[project]
+name = "prosemasters-skill"
+version = "0.1.0"
+description = "Monorepo metadata for Vercel Python build compatibility."
+requires-python = ">=3.11"
+dependencies = []
+
