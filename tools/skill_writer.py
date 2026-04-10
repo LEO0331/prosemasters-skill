@@ -51,6 +51,18 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def normalize_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [str(v).strip() for v in value if str(v).strip()]
+    if isinstance(value, str):
+        value = value.strip()
+        return [value] if value else []
+    text = str(value).strip()
+    return [text] if text else []
+
+
 def to_bullets(items: list[str], fallback: str) -> str:
     if not items:
         return f"- {fallback}\n"
@@ -58,56 +70,63 @@ def to_bullets(items: list[str], fallback: str) -> str:
 
 
 def render_self_md(profile: dict[str, Any], memory: dict[str, Any]) -> str:
-    name = profile.get("name", "Unknown Master")
-    dynasty = profile.get("dynasty", "Unknown")
-    context = profile.get("historical_context", "Not provided")
-    philosophy = profile.get("core_philosophy", "Not provided")
+    name = str(profile.get("name", "Unknown Master"))
+    dynasty = str(profile.get("dynasty", "Unknown"))
+    context = str(profile.get("historical_context", "Not provided"))
+    school = str(profile.get("literary_school", "Not provided"))
+    philosophy = str(profile.get("core_philosophy", "Not provided"))
 
-    values = memory.get("core_values", profile.get("core_values", []))
-    values = values if isinstance(values, list) else [str(values)]
+    values = normalize_list(memory.get("core_values", profile.get("core_values")))
+    milestones = normalize_list(memory.get("timeline_milestones", profile.get("timeline_milestones")))
+    geography = normalize_list(memory.get("geography_path", profile.get("geography_path")))
+    relationships = normalize_list(memory.get("relationships", profile.get("relationships")))
+    citations = normalize_list(memory.get("citation_ids"))
 
-    milestones = memory.get("timeline_milestones", profile.get("timeline_milestones", []))
-    milestones = milestones if isinstance(milestones, list) else [str(milestones)]
-
-    geography = memory.get("geography_path", profile.get("geography_path", []))
-    geography = geography if isinstance(geography, list) else [str(geography)]
-
-    relationships = memory.get("relationships", profile.get("relationships", []))
-    relationships = relationships if isinstance(relationships, list) else [str(relationships)]
-
-    citations = memory.get("citation_ids", [])
-    citations = citations if isinstance(citations, list) else [str(citations)]
+    intellectual_axes = normalize_list(memory.get("intellectual_axes", profile.get("intellectual_axes")))
+    worldview_tensions = normalize_list(memory.get("worldview_tensions", profile.get("worldview_tensions")))
+    preferred_themes = normalize_list(memory.get("preferred_themes", profile.get("preferred_themes")))
+    emotional_signature = normalize_list(memory.get("emotional_signature", profile.get("emotional_signature")))
+    voice_anchors = normalize_list(memory.get("voice_anchors", profile.get("voice_anchors")))
+    anachronism_policy = normalize_list(memory.get("anachronism_policy", profile.get("anachronism_policy")))
 
     return (
         f"# {name} Master Memory\n\n"
         f"## Identity\n"
         f"- Name: {name}\n"
         f"- Dynasty: {dynasty}\n"
+        f"- Literary school: {school}\n"
         f"- Historical context: {context}\n"
         f"- Core philosophy: {philosophy}\n\n"
         f"## Core Values\n{to_bullets(values, 'Pending extraction')}\n"
+        f"## Intellectual Axes\n{to_bullets(intellectual_axes, 'Pending extraction')}\n"
+        f"## Worldview Tensions\n{to_bullets(worldview_tensions, 'Pending extraction')}\n"
+        f"## Preferred Themes\n{to_bullets(preferred_themes, 'Pending extraction')}\n"
+        f"## Emotional Signature\n{to_bullets(emotional_signature, 'Pending extraction')}\n"
         f"## Timeline Milestones\n{to_bullets(milestones, 'Pending extraction')}\n"
         f"## Geography Path\n{to_bullets(geography, 'Pending extraction')}\n"
         f"## Key Relationships\n{to_bullets(relationships, 'Pending extraction')}\n"
+        f"## Voice Anchors\n{to_bullets(voice_anchors, 'Pending extraction')}\n"
+        f"## Anachronism Policy\n{to_bullets(anachronism_policy, 'Translate modern topics by analogy to historical categories.')}\n"
         f"## Citation IDs\n{to_bullets(citations, 'No citations yet')}"
     )
 
 
 def render_persona_md(profile: dict[str, Any], persona: dict[str, Any]) -> str:
-    p = profile.get("persona", {})
-    p = p if isinstance(p, dict) else {}
+    base = profile.get("persona", {})
+    base = base if isinstance(base, dict) else {}
 
-    layer1 = persona.get("l1_hard_rules", p.get("l1_hard_rules", []))
-    layer2 = persona.get("l2_identity_role", p.get("l2_identity_role", []))
-    layer3 = persona.get("l3_expression_style", p.get("l3_expression_style", []))
-    layer4 = persona.get("l4_judgment_logic", p.get("l4_judgment_logic", []))
-    layer5 = persona.get("l5_social_conduct", p.get("l5_social_conduct", []))
+    layer1 = normalize_list(persona.get("l1_hard_rules", base.get("l1_hard_rules")))
+    layer2 = normalize_list(persona.get("l2_identity_role", base.get("l2_identity_role")))
+    layer3 = normalize_list(persona.get("l3_expression_style", base.get("l3_expression_style")))
+    layer4 = normalize_list(persona.get("l4_judgment_logic", base.get("l4_judgment_logic")))
+    layer5 = normalize_list(persona.get("l5_social_conduct", base.get("l5_social_conduct")))
 
-    layer1 = layer1 if isinstance(layer1, list) else [str(layer1)]
-    layer2 = layer2 if isinstance(layer2, list) else [str(layer2)]
-    layer3 = layer3 if isinstance(layer3, list) else [str(layer3)]
-    layer4 = layer4 if isinstance(layer4, list) else [str(layer4)]
-    layer5 = layer5 if isinstance(layer5, list) else [str(layer5)]
+    lexicon = normalize_list(persona.get("lexicon_preferences", base.get("lexicon_preferences")))
+    rhythm = normalize_list(persona.get("rhythm_structure", base.get("rhythm_structure")))
+    decision_ladder = normalize_list(persona.get("decision_ladder", base.get("decision_ladder")))
+    audience_tone = normalize_list(persona.get("audience_tone", base.get("audience_tone")))
+    anti_patterns = normalize_list(persona.get("anti_patterns", base.get("anti_patterns")))
+    rewrite_strategies = normalize_list(persona.get("rewrite_strategies", base.get("rewrite_strategies")))
 
     return (
         "# Literary Persona\n\n"
@@ -117,17 +136,29 @@ def render_persona_md(profile: dict[str, Any], persona: dict[str, Any]) -> str:
         f"{to_bullets(layer2, 'Keep historical consistency.')}\n"
         "## L3 Expression Style\n"
         f"{to_bullets(layer3, 'Prefer classical diction and measured cadence.')}\n"
+        "## L3.1 Lexicon Preferences\n"
+        f"{to_bullets(lexicon, 'Prefer source-attested terms and imagery.')}\n"
+        "## L3.2 Rhythm and Structure\n"
+        f"{to_bullets(rhythm, 'Control sentence-length contrast and rhetorical pacing.')}\n"
         "## L4 Judgment Logic\n"
         f"{to_bullets(layer4, 'Align with known ethical and political stance.')}\n"
+        "## L4.1 Decision Ladder\n"
+        f"{to_bullets(decision_ladder, 'Principle -> context -> action -> rhetorical closure.')}\n"
         "## L5 Social Conduct\n"
-        f"{to_bullets(layer5, 'Preserve tone toward peers, juniors, and rivals.')}"
+        f"{to_bullets(layer5, 'Preserve tone toward peers, juniors, and rivals.')}\n"
+        "## L5.1 Audience Tone Matrix\n"
+        f"{to_bullets(audience_tone, 'Vary tone by audience while preserving identity.')}\n"
+        "## Failure Modes to Avoid\n"
+        f"{to_bullets(anti_patterns, 'Avoid empty ornament and ahistorical postures.')}\n"
+        "## Rewrite Strategies\n"
+        f"{to_bullets(rewrite_strategies, 'If style drifts, restate claim with stronger period diction and logic.') }"
     )
 
 
 def build_meta(profile: dict[str, Any], slug: str) -> dict[str, Any]:
     name = profile.get("name", slug)
     dynasty = profile.get("dynasty", "Unknown")
-    meta = {
+    return {
         "slug": slug,
         "name": name,
         "dynasty": dynasty,
@@ -136,6 +167,12 @@ def build_meta(profile: dict[str, Any], slug: str) -> dict[str, Any]:
         "literary_school": profile.get("literary_school", ""),
         "core_philosophy": profile.get("core_philosophy", ""),
         "version": profile.get("version", "1.0.0"),
+        "fidelity_profile": {
+            "min_citations_per_nontrivial_claim": 1,
+            "allow_modern_topic_translation": True,
+            "modern_topic_strategy": "analogy_to_historical_categories",
+            "reject_ahistorical_slang": True,
+        },
         "prompt_contract": [
             str(PROMPTS_DIR / "intake.md"),
             str(PROMPTS_DIR / "memory_analyzer.md"),
@@ -148,7 +185,6 @@ def build_meta(profile: dict[str, Any], slug: str) -> dict[str, Any]:
         "created_at": now_iso(),
         "updated_at": now_iso(),
     }
-    return meta
 
 
 def build_sources(profile: dict[str, Any], citation_data: dict[str, Any]) -> dict[str, Any]:
@@ -231,18 +267,34 @@ def build_master(slug: str, profile_path: str, memory_path: str | None, persona_
 def runtime_skill_markdown(slug: str, name: str) -> str:
     return f"""---
 name: {slug}
-description: Distilled literary persona for {name}
+description: High-fidelity distilled literary persona for {name}
 user-invocable: true
 ---
 
 # {name}
 
-This generated skill uses local artifacts:
+## Identity Contract
+You are not a generic assistant in this mode. You are a constrained digital reconstruction of **{name}**.
+
+## Required Local Artifacts
 - self.md
 - persona.md
 - meta.json
 
-When invoked, speak and write with this master's distilled literary voice.
+## Runtime Rules
+1. Apply `persona.md` as the first-pass filter before writing any response.
+2. Ground nontrivial judgments in `self.md` memory and source-backed stance.
+3. If user asks modern topics, translate by historical analogy instead of modern slang.
+4. Keep period-appropriate diction and rhetorical posture.
+5. If challenged with "he wouldn't say this", self-correct using L1/L4 constraints and rewrite.
+
+## Response Quality Gate
+- Voice consistency: pass/fail
+- Historical consistency: pass/fail
+- Argument coherence: pass/fail
+- Style drift check: pass/fail
+
+If any gate fails, rewrite before final output.
 """
 
 
@@ -267,12 +319,11 @@ def export_master(slug: str) -> dict[str, Any]:
         shutil.copy2(s, dst / fname)
 
     meta = load_meta(slug)
-    (dst / "SKILL.md").write_text(runtime_skill_markdown(slug, meta.get("name", slug)), encoding="utf-8")
+    (dst / "SKILL.md").write_text(runtime_skill_markdown(slug, str(meta.get("name", slug))), encoding="utf-8")
     return {"action": "export", "slug": slug, "runtime_path": str(dst)}
 
 
 def combine_master(slug: str) -> dict[str, Any]:
-    # In v1, combine validates canonical schema then exports runtime files.
     _ = load_meta(slug)
     return export_master(slug)
 

@@ -11,6 +11,12 @@
   "literary_school": "古文運動後繼者，豪放詞代表",
   "core_philosophy": "儒釋道兼修，以入世責任與自我超脫並行",
   "version": "1.0.0",
+  "fidelity_profile": {
+    "min_citations_per_nontrivial_claim": 1,
+    "allow_modern_topic_translation": true,
+    "modern_topic_strategy": "analogy_to_historical_categories",
+    "reject_ahistorical_slang": true
+  },
   "prompt_contract": [
     "/Users/Leo/Documents/prosemasters-skill/prompts/intake.md",
     "/Users/Leo/Documents/prosemasters-skill/prompts/memory_analyzer.md",
@@ -20,6 +26,6 @@
     "/Users/Leo/Documents/prosemasters-skill/prompts/merger.md",
     "/Users/Leo/Documents/prosemasters-skill/prompts/critique_handler.md"
   ],
-  "created_at": "2026-04-10T03:44:03.162523+00:00",
-  "updated_at": "2026-04-10T03:44:03.162578+00:00"
+  "created_at": "2026-04-10T03:56:37.081610+00:00",
+  "updated_at": "2026-04-10T03:56:37.081695+00:00"
 }

@@ -34,6 +34,82 @@ Output targets:
 6. Export runnable skill
 - `python3 tools/skill_writer.py --action combine --slug my-master`
 
+## High-Fidelity JSON Schemas
+
+Use these templates directly when creating a new master (the third master onward can copy-paste and fill values).
+
+### `profile.json` schema template
+
+```json
+{
+  "slug": "master-slug",
+  "name": "名家姓名",
+  "dynasty": "朝代",
+  "titles": ["字號/封號", "官職稱謂"],
+  "historical_context": "一句話描述時代位置與生平關鍵條件。",
+  "literary_school": "文學流派與運動定位。",
+  "core_philosophy": "核心思想與價值立場。",
+  "sources": [
+    "tests/fixtures/master-slug/source.txt",
+    "tests/fixtures/master-slug/criticism.txt",
+    "tests/fixtures/master-slug/letters.txt",
+    "tests/fixtures/master-slug/biography.csv"
+  ],
+  "persona": {
+    "l1_hard_rules": ["不可違反規則 1", "不可違反規則 2"],
+    "l2_identity_role": ["身份定位與發聲角色"],
+    "l3_expression_style": ["句法、修辭、節奏的總體特徵"],
+    "l4_judgment_logic": ["判斷順序與價值優先級"],
+    "l5_social_conduct": ["對君主/同輩/後學/異見者的基準態度"],
+    "lexicon_preferences": ["詞彙偏好與禁忌詞域"],
+    "rhythm_structure": ["段落與句式的節奏控制規則"],
+    "decision_ladder": ["決策階梯步驟 1", "步驟 2", "步驟 3"],
+    "audience_tone": ["對不同受眾的語氣矩陣"],
+    "anti_patterns": ["常見失真型態"],
+    "rewrite_strategies": ["失真後的修正策略" ]
+  }
+}
+```
+
+### `memory.json` schema template
+
+```json
+{
+  "core_values": ["核心價值 1", "核心價值 2"],
+  "intellectual_axes": ["張力軸 1：A vs B", "張力軸 2：C vs D"],
+  "worldview_tensions": ["世界觀內在矛盾與平衡方式"],
+  "preferred_themes": ["常見主題 1", "常見主題 2"],
+  "emotional_signature": ["情緒轉折模式與收束方式"],
+  "timeline_milestones": ["YYYY 事件", "YYYY-YYYY 事件"],
+  "geography_path": ["地點 1", "地點 2", "地點 3"],
+  "relationships": ["人物 A（關係性）", "人物 B（關係性）"],
+  "voice_anchors": ["語錄或風格錨點 1", "語錄或風格錨點 2"],
+  "anachronism_policy": [
+    "現代議題如何做歷史類比轉譯",
+    "哪些語域/詞彙絕對不使用"
+  ],
+  "citation_ids": ["SRC-XXX-001", "SRC-XXX-002", "SRC-XXX-BIO"]
+}
+```
+
+### `persona.json` schema template
+
+```json
+{
+  "l1_hard_rules": ["硬性規則 1", "硬性規則 2"],
+  "l2_identity_role": ["身份與角色設定"],
+  "l3_expression_style": ["文體、句法、修辭、意象"],
+  "lexicon_preferences": ["偏好詞群", "禁忌詞群"],
+  "rhythm_structure": ["起承轉合節奏規則"],
+  "l4_judgment_logic": ["價值判準順序", "論證結構"],
+  "decision_ladder": ["定義問題", "辨析衝突", "提出行動", "語氣收束"],
+  "l5_social_conduct": ["社交規範 1", "社交規範 2"],
+  "audience_tone": ["對君主/同輩/後學/異見者的差異化語氣"],
+  "anti_patterns": ["失真模式 1", "失真模式 2"],
+  "rewrite_strategies": ["修正策略 1", "修正策略 2"]
+}
+```
+
 ## Backup and rollback
 
 - Backup: `python3 tools/version_manager.py --action backup --slug my-master`

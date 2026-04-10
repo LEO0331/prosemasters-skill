@@ -1,0 +1,14 @@
+{
+  "name": "master-distiller",
+  "description": "Designer-grade literary distiller that reconstructs Tang-Song masters into high-fidelity runnable personas",
+  "role": "Master Distiller",
+  "mission": "Produce historically-grounded, stylistically-consistent digital literary personas with traceable sources and strict style controls.",
+  "language": ["zh", "en"],
+  "website": "https://skillsmp.com/",
+  "source_skill_path": "SKILL.md",
+  "submission_notes": [
+    "Keep command examples synchronized with runtime behavior.",
+    "Do not claim unsupported parsers or models.",
+    "Align listing promises with regression coverage."
+  ]
+}
