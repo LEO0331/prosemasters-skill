@@ -48,4 +48,21 @@ done
 echo "[8/8] list masters"
 python3 tools/skill_writer.py --action list
 
+echo "[9/9] security hardening checks"
+if python3 tools/skill_writer.py --action delete --slug ../../tmp >/dev/null 2>&1; then
+  echo "FAIL: path traversal slug was accepted by skill_writer"
+  exit 1
+fi
+
+if python3 tools/version_manager.py --action status --slug ../../tmp >/dev/null 2>&1; then
+  echo "FAIL: path traversal slug was accepted by version_manager"
+  exit 1
+fi
+
+touch /tmp/fake.tar.gz
+if python3 tools/version_manager.py --action rollback --slug su-shi --archive /tmp/fake.tar.gz >/dev/null 2>&1; then
+  echo "FAIL: untrusted external archive was accepted without override"
+  exit 1
+fi
+
 echo "Regression completed"

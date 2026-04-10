@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -16,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MASTERS_DIR = ROOT / "masters"
 RUNTIME_DIR = ROOT / ".claude" / "skills"
 PROMPTS_DIR = ROOT / "prompts"
+SLUG_RE = re.compile(r"^[a-z0-9-]+$")
 
 
 def now_iso() -> str:
@@ -25,13 +27,34 @@ def now_iso() -> str:
 def slug_required(slug: str | None) -> str:
     if not slug:
         raise RuntimeError("--slug is required for this action")
+    if not SLUG_RE.fullmatch(slug):
+        raise RuntimeError("invalid slug: use lowercase letters, digits, and hyphens only")
     return slug
 
 
+def safe_child(base: Path, name: str) -> Path:
+    """Resolve base/name and ensure it stays within base."""
+    candidate = (base / name).resolve()
+    base_resolved = base.resolve()
+    try:
+        candidate.relative_to(base_resolved)
+    except ValueError:
+        raise RuntimeError(f"unsafe path escape attempt: {name}")
+    return candidate
+
+
 def ensure_master(slug: str) -> Path:
-    d = MASTERS_DIR / slug
+    d = master_dir(slug)
     d.mkdir(parents=True, exist_ok=True)
     return d
+
+
+def master_dir(slug: str) -> Path:
+    return safe_child(MASTERS_DIR, slug)
+
+
+def runtime_dir(slug: str) -> Path:
+    return safe_child(RUNTIME_DIR, slug)
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -299,17 +322,17 @@ If any gate fails, rewrite before final output.
 
 
 def load_meta(slug: str) -> dict[str, Any]:
-    p = MASTERS_DIR / slug / "meta.json"
+    p = master_dir(slug) / "meta.json"
     if not p.exists():
         raise RuntimeError(f"missing meta.json for slug: {slug}")
     return json.loads(p.read_text(encoding="utf-8"))
 
 
 def export_master(slug: str) -> dict[str, Any]:
-    src = MASTERS_DIR / slug
+    src = master_dir(slug)
     if not src.exists():
         raise RuntimeError(f"master not found: {slug}")
-    dst = RUNTIME_DIR / slug
+    dst = runtime_dir(slug)
     dst.mkdir(parents=True, exist_ok=True)
 
     for fname in ["self.md", "persona.md", "meta.json"]:
@@ -342,7 +365,7 @@ def list_masters() -> dict[str, Any]:
 
 def delete_master(slug: str) -> dict[str, Any]:
     removed = []
-    for path in [MASTERS_DIR / slug, RUNTIME_DIR / slug]:
+    for path in [master_dir(slug), runtime_dir(slug)]:
         if path.exists():
             shutil.rmtree(path)
             removed.append(str(path))
