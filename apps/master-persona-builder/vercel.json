@@ -1,13 +1,1 @@
-{
-  "functions": {
-    "api/generate.py": {
-      "maxDuration": 30
-    },
-    "api/validate.py": {
-      "maxDuration": 15
-    },
-    "api/health.py": {
-      "maxDuration": 10
-    }
-  }
-}
+{}
