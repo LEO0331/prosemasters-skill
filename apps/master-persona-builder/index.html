@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Master Persona Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero reveal">
+        <p class="eyebrow">Digital Lineage Studio</p>
+        <h1>Master Persona Builder</h1>
+        <p class="subtitle">Generate <code>SKILL.md</code> and <code>wiki.md</code> from form input or custom JSON.</p>
+      </header>
+
+      <section class="panel reveal">
+        <h2>Core Fields</h2>
+        <div class="grid">
+          <label>Slug<input id="slug" placeholder="han-yu" /></label>
+          <label>Name<input id="name" placeholder="Han Yu" /></label>
+          <label>Description<input id="description" placeholder="High-fidelity literary persona" /></label>
+          <label>Version<input id="version" value="1.0.0" /></label>
+          <label>Display Name<input id="display_name" placeholder="韓愈" /></label>
+          <label>Dynasty<input id="dynasty" placeholder="中唐" /></label>
+          <label>Literary School<input id="literary_school" placeholder="古文運動領袖" /></label>
+        </div>
+        <label>Historical Context<textarea id="historical_context" rows="2"></textarea></label>
+        <label>Core Philosophy<textarea id="core_philosophy" rows="2"></textarea></label>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Advanced Arrays (one item per line)</h2>
+        <div class="grid">
+          <label>Core Values<textarea id="core_values" rows="6"></textarea></label>
+          <label>Timeline Milestones<textarea id="timeline_milestones" rows="6"></textarea></label>
+          <label>L1 Hard Rules<textarea id="l1_hard_rules" rows="6"></textarea></label>
+          <label>L3 Expression Style<textarea id="l3_expression_style" rows="6"></textarea></label>
+          <label>Decision Ladder<textarea id="decision_ladder" rows="6"></textarea></label>
+          <label>Voice Anchors<textarea id="voice_anchors" rows="6"></textarea></label>
+        </div>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Custom JSON</h2>
+        <textarea id="json_input" rows="14" placeholder="Paste custom JSON here..."></textarea>
+        <div class="row">
+          <button id="from_form">Load JSON from Form</button>
+          <button id="to_form">Apply JSON to Form</button>
+          <button id="download_json">Download JSON</button>
+        </div>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Source Materials Routing</h2>
+        <p class="subtitle">Categorize each source so backend can decide extraction tool routing.</p>
+        <div id="sources_list"></div>
+        <div class="row">
+          <button id="add_source">Add Source</button>
+        </div>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Actions</h2>
+        <div class="row">
+          <button id="validate_btn">Validate</button>
+          <button id="generate_btn" class="primary">Generate</button>
+        </div>
+        <pre id="status"></pre>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Generated SKILL.md</h2>
+        <textarea id="skill_out" rows="16" readonly></textarea>
+        <div class="row">
+          <button id="copy_skill">Copy</button>
+          <button id="download_skill">Download SKILL.md</button>
+        </div>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Generated wiki.md</h2>
+        <textarea id="wiki_out" rows="16" readonly></textarea>
+        <div class="row">
+          <button id="copy_wiki">Copy</button>
+          <button id="download_wiki">Download wiki.md</button>
+        </div>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Tool Routing Preview</h2>
+        <pre id="tool_plan_summary"></pre>
+        <div class="table-wrap">
+          <table id="exec_table">
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>Tool</th>
+                <th>Status</th>
+                <th>Exit</th>
+                <th>Duration (ms)</th>
+                <th>Logs</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+name: Master Persona Builder CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/master-persona-builder/**"
+      - ".github/workflows/deploy-master-persona-builder.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ci-master-persona-builder
+  cancel-in-progress: true
+
+jobs:
+  security-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Python syntax check (API)
+        run: |
+          python -m py_compile \
+            apps/master-persona-builder/api/_lib.py \
+            apps/master-persona-builder/api/validate.py \
+            apps/master-persona-builder/api/generate.py \
+            apps/master-persona-builder/api/health.py
+
+      - name: Run project regression + security checks
+        run: bash scripts/regression.sh
+
+      - name: Node syntax check (frontend script)
+        run: node --check apps/master-persona-builder/app.js
