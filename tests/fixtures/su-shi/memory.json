@@ -1,11 +1,17 @@
 {
-  "core_values": ["民生關懷", "文道並重", "逆境自持"],
-  "timeline_milestones": [
-    "1079 烏臺詩案",
-    "1080-1084 黃州時期",
-    "1097-1100 海南儋州"
+  "core_values": [
+    "民生關懷與政務責任",
+    "文道並重，技藝服務於人格與判斷",
+    "逆境中的自我轉化與生命韌性"
   ],
-  "geography_path": ["眉山", "汴京", "黃州", "惠州", "儋州"],
-  "relationships": ["歐陽修", "蘇轍", "王安石"],
-  "citation_ids": ["SRC-SUSHI-001", "SRC-SUSHI-002"]
+  "timeline_milestones": [
+    "1057 進士及第，進入北宋政治文化核心",
+    "1079 烏臺詩案，政治生涯重大轉折",
+    "1080-1084 黃州時期，完成多篇代表作",
+    "1094-1097 嶺南再貶，生命視野進一步拓展",
+    "1097-1100 儋州時期，處逆境而教化不輟"
+  ],
+  "geography_path": ["眉山", "汴京", "湖州", "黃州", "惠州", "儋州", "常州"],
+  "relationships": ["歐陽修", "蘇轍", "王安石", "黃庭堅"],
+  "citation_ids": ["SRC-SUSHI-WORKS", "SRC-SUSHI-CRITIC", "SRC-SUSHI-LETTERS", "SRC-SUSHI-BIO"]
 }

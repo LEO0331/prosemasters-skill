@@ -1,11 +1,16 @@
 {
-  "core_values": ["道統", "教育", "政教責任"],
-  "timeline_milestones": [
-    "803 諫迎佛骨表",
-    "803-804 潮州貶謫",
-    "824 卒"
+  "core_values": [
+    "道統與正名",
+    "教育與師道",
+    "政教責任與公共倫理"
   ],
-  "geography_path": ["河陽", "長安", "潮州"],
-  "relationships": ["柳宗元", "孟郊", "李翱"],
-  "citation_ids": ["SRC-HANYU-001", "SRC-HANYU-002"]
+  "timeline_milestones": [
+    "792 進士及第，進入仕途",
+    "803 諫迎佛骨表，政治風險全面顯現",
+    "803-804 潮州貶謫，地方實踐與教化並進",
+    "819 召還中央，持續以文議政"
+  ],
+  "geography_path": ["河陽", "長安", "潮州", "長安"],
+  "relationships": ["柳宗元", "孟郊", "李翱", "張籍"],
+  "citation_ids": ["SRC-HANYU-WORKS", "SRC-HANYU-CRITIC", "SRC-HANYU-LETTERS", "SRC-HANYU-BIO"]
 }

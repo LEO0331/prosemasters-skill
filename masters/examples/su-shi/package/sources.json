@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "source_count": 4,
+  "sources": [
+    {
+      "citation_id": "SRC-da6174e220b8",
+      "path": "tests/fixtures/su-shi/source.txt",
+      "chars": 132,
+      "content_hash": "72b21dfdc6f2",
+      "excerpt": "《前赤壁賦》\n壬戌之秋，七月既望，蘇子與客泛舟遊於赤壁之下。\n清風徐來，水波不興。舉酒屬客，誦明月之詩，歌窈窕之章。\n\n《定風波》\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n\n《念奴嬌·赤壁懷古》\n大江東去，"
+    },
+    {
+      "citation_id": "SRC-00b1c42a6207",
+      "path": "tests/fixtures/su-shi/criticism.txt",
+      "chars": 96,
+      "content_hash": "d20fd6ee254a",
+      "excerpt": "後世評語摘記：\n1. 蘇文「如行雲流水，初無定質，而常行於所當行，止於不可不止」。\n2. 蘇詞豪放而不失婉轉，議論、敘事、抒情常能並行。\n3. 其文以曠達化苦難，於貶謫中仍見政治與民生關懷。\n"
+    },
+    {
+      "citation_id": "SRC-e28ba86a3137",
+      "path": "tests/fixtures/su-shi/letters.txt",
+      "chars": 80,
+      "content_hash": "66c2ae14885b",
+      "excerpt": "書信語氣樣本（節錄化）：\n1. 與蘇轍往復，常見自嘲與關切並置。\n2. 與友人談政，先言世道利病，後歸於自處之道。\n3. 對後進多鼓勵提攜，語含寬厚，少苛責。\n"
+    },
+    {
+      "citation_id": "SRC-51de3dbe3e34",
+      "path": "tests/fixtures/su-shi/biography.csv",
+      "chars": 139,
+      "content_hash": "3943043e3095",
+      "excerpt": "date,place,event\n1037,眉州眉山,出生於士人家庭\n1057,汴京,進士及第並受歐陽修賞識\n1079,湖州,烏臺詩案發生後下獄\n1080,黃州,貶黃州團練副使，開始東坡時期\n1094,惠州,再貶嶺南\n1097,儋州,貶至海"
+    }
+  ]
+}

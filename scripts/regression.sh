@@ -16,14 +16,20 @@ python3 tools/skill_writer.py --help >/dev/null
 python3 tools/version_manager.py --help >/dev/null
 
 for slug in su-shi han-yu; do
+  CORPUS_MAIN="tests/fixtures/$slug/source.txt"
+  CORPUS_CRITIC="tests/fixtures/$slug/criticism.txt"
+  CORPUS_LETTERS="tests/fixtures/$slug/letters.txt"
+  BIO_CSV="tests/fixtures/$slug/biography.csv"
+
   echo "[3/8] parse source: $slug"
-  python3 tools/literature_parser.py "tests/fixtures/$slug/source.txt" -o "/tmp/$slug.parsed.json"
+  python3 tools/literature_parser.py "$CORPUS_MAIN" "$CORPUS_CRITIC" "$CORPUS_LETTERS" -o "/tmp/$slug.parsed.json"
 
   echo "[4/8] meter analysis: $slug"
   python3 tools/meter_analyzer.py "/tmp/$slug.parsed.json" -o "/tmp/$slug.meter.json"
 
-  echo "[5/8] citation map: $slug"
-  python3 tools/citation_manager.py "tests/fixtures/$slug/source.txt" -o "/tmp/$slug.citations.json"
+  echo "[5/8] biography + citation map: $slug"
+  python3 tools/biography_mapper.py "$BIO_CSV" -o "/tmp/$slug.bio.json"
+  python3 tools/citation_manager.py "$CORPUS_MAIN" "$CORPUS_CRITIC" "$CORPUS_LETTERS" "$BIO_CSV" -o "/tmp/$slug.citations.json"
 
   echo "[6/8] build+combine: $slug"
   python3 tools/skill_writer.py --action build --slug "$slug" \
