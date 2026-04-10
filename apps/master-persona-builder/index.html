@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+TC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -15,40 +15,46 @@
   <body>
     <main class="container">
       <header class="hero reveal">
-        <p class="eyebrow">Digital Lineage Studio</p>
-        <h1>Master Persona Builder</h1>
-        <p class="subtitle">Generate <code>SKILL.md</code> and <code>wiki.md</code> from form input or custom JSON.</p>
+        <div class="hero-top">
+          <p class="eyebrow" id="eyebrow">Digital Lineage Studio</p>
+          <button id="lang_switch" class="lang-switch" type="button">繁中</button>
+        </div>
+        <h1 id="hero_title">Master Persona Builder</h1>
+        <p class="subtitle" id="hero_subtitle">Generate <code>SKILL.md</code> and <code>wiki.md</code> from form input or custom JSON.</p>
       </header>
 
       <section class="panel reveal">
-        <h2>Core Fields</h2>
+        <h2 id="section_core">Core Fields</h2>
+        <p class="section-note" id="desc_core">Define the master identity and base metadata used by all generated outputs.</p>
         <div class="grid">
-          <label>Slug<input id="slug" placeholder="han-yu" /></label>
-          <label>Name<input id="name" placeholder="Han Yu" /></label>
-          <label>Description<input id="description" placeholder="High-fidelity literary persona" /></label>
-          <label>Version<input id="version" value="1.0.0" /></label>
-          <label>Display Name<input id="display_name" placeholder="韓愈" /></label>
-          <label>Dynasty<input id="dynasty" placeholder="中唐" /></label>
-          <label>Literary School<input id="literary_school" placeholder="古文運動領袖" /></label>
+          <label><span id="label_slug">Slug</span><input id="slug" placeholder="han-yu" /></label>
+          <label><span id="label_name">Name</span><input id="name" placeholder="Han Yu" /></label>
+          <label><span id="label_description">Description</span><input id="description" placeholder="High-fidelity literary persona" /></label>
+          <label><span id="label_version">Version</span><input id="version" value="1.0.0" /></label>
+          <label><span id="label_display_name">Display Name</span><input id="display_name" placeholder="韓愈" /></label>
+          <label><span id="label_dynasty">Dynasty</span><input id="dynasty" placeholder="中唐" /></label>
+          <label><span id="label_school">Literary School</span><input id="literary_school" placeholder="古文運動領袖" /></label>
         </div>
-        <label>Historical Context<textarea id="historical_context" rows="2"></textarea></label>
-        <label>Core Philosophy<textarea id="core_philosophy" rows="2"></textarea></label>
+        <label><span id="label_context">Historical Context</span><textarea id="historical_context" rows="2"></textarea></label>
+        <label><span id="label_philosophy">Core Philosophy</span><textarea id="core_philosophy" rows="2"></textarea></label>
       </section>
 
       <section class="panel reveal">
-        <h2>Advanced Arrays (one item per line)</h2>
+        <h2 id="section_advanced">Advanced Arrays (one item per line)</h2>
+        <p class="section-note" id="desc_advanced">Each line becomes one structured item in memory/persona to improve fidelity.</p>
         <div class="grid">
-          <label>Core Values<textarea id="core_values" rows="6"></textarea></label>
-          <label>Timeline Milestones<textarea id="timeline_milestones" rows="6"></textarea></label>
-          <label>L1 Hard Rules<textarea id="l1_hard_rules" rows="6"></textarea></label>
-          <label>L3 Expression Style<textarea id="l3_expression_style" rows="6"></textarea></label>
-          <label>Decision Ladder<textarea id="decision_ladder" rows="6"></textarea></label>
-          <label>Voice Anchors<textarea id="voice_anchors" rows="6"></textarea></label>
+          <label><span id="label_core_values">Core Values</span><textarea id="core_values" rows="6"></textarea></label>
+          <label><span id="label_timeline">Timeline Milestones</span><textarea id="timeline_milestones" rows="6"></textarea></label>
+          <label><span id="label_l1_rules">L1 Hard Rules</span><textarea id="l1_hard_rules" rows="6"></textarea></label>
+          <label><span id="label_l3_style">L3 Expression Style</span><textarea id="l3_expression_style" rows="6"></textarea></label>
+          <label><span id="label_decision">Decision Ladder</span><textarea id="decision_ladder" rows="6"></textarea></label>
+          <label><span id="label_voice">Voice Anchors</span><textarea id="voice_anchors" rows="6"></textarea></label>
         </div>
       </section>
 
       <section class="panel reveal">
-        <h2>Custom JSON</h2>
+        <h2 id="section_json">Custom JSON</h2>
+        <p class="section-note" id="desc_json">Use JSON mode to import/export full payloads for reproducible generation.</p>
         <textarea id="json_input" rows="14" placeholder="Paste custom JSON here..."></textarea>
         <div class="row">
           <button id="from_form">Load JSON from Form</button>
@@ -58,8 +64,8 @@
       </section>
 
       <section class="panel reveal">
-        <h2>Source Materials Routing</h2>
-        <p class="subtitle">Categorize each source so backend can decide extraction tool routing.</p>
+        <h2 id="section_sources">Source Materials Routing</h2>
+        <p class="section-note" id="sources_subtitle">Categorize each source so backend can decide extraction tools automatically.</p>
         <div id="sources_list"></div>
         <div class="row">
           <button id="add_source">Add Source</button>
@@ -67,48 +73,38 @@
       </section>
 
       <section class="panel reveal">
-        <h2>Actions</h2>
-        <label>API Key (optional for protected API)
+        <h2 id="section_output">Generated Output</h2>
+        <p class="section-note" id="desc_output">Choose one target format to generate. Both use the same backend pipeline and output panel.</p>
+        <label><span id="label_api_key">API Key (optional for protected API)</span>
           <input id="api_key" type="password" placeholder="Set if MPB_API_KEY is enabled on server" />
         </label>
         <div class="row">
-          <button id="validate_btn">Validate</button>
-          <button id="generate_btn" class="primary">Generate</button>
+          <button id="generate_skill_btn" class="primary">Generate SKILL.md</button>
+          <button id="generate_wiki_btn">Generate wiki.md</button>
+        </div>
+        <h3 id="output_title">SKILL.md</h3>
+        <textarea id="output_out" rows="16" readonly></textarea>
+        <div class="row">
+          <button id="copy_output">Copy</button>
+          <button id="download_output">Download</button>
         </div>
         <pre id="status"></pre>
       </section>
 
       <section class="panel reveal">
-        <h2>Generated SKILL.md</h2>
-        <textarea id="skill_out" rows="16" readonly></textarea>
-        <div class="row">
-          <button id="copy_skill">Copy</button>
-          <button id="download_skill">Download SKILL.md</button>
-        </div>
-      </section>
-
-      <section class="panel reveal">
-        <h2>Generated wiki.md</h2>
-        <textarea id="wiki_out" rows="16" readonly></textarea>
-        <div class="row">
-          <button id="copy_wiki">Copy</button>
-          <button id="download_wiki">Download wiki.md</button>
-        </div>
-      </section>
-
-      <section class="panel reveal">
-        <h2>Tool Routing Preview</h2>
+        <h2 id="section_tool_preview">Tool Routing Preview</h2>
+        <p class="section-note" id="desc_tool_preview">Shows planned extraction routes and real execution logs for each tool step.</p>
         <pre id="tool_plan_summary"></pre>
         <div class="table-wrap">
           <table id="exec_table">
             <thead>
               <tr>
-                <th>Step</th>
-                <th>Tool</th>
-                <th>Status</th>
-                <th>Exit</th>
-                <th>Duration (ms)</th>
-                <th>Logs</th>
+                <th id="th_step">Step</th>
+                <th id="th_tool">Tool</th>
+                <th id="th_status">Status</th>
+                <th id="th_exit">Exit</th>
+                <th id="th_duration">Duration (ms)</th>
+                <th id="th_logs">Logs</th>
               </tr>
             </thead>
             <tbody></tbody>
