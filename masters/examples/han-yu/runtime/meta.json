@@ -18,13 +18,13 @@
     "reject_ahistorical_slang": true
   },
   "prompt_contract": [
-    "/Users/Leo/Documents/prosemasters-skill/prompts/intake.md",
-    "/Users/Leo/Documents/prosemasters-skill/prompts/memory_analyzer.md",
-    "/Users/Leo/Documents/prosemasters-skill/prompts/literary_persona_analyzer.md",
-    "/Users/Leo/Documents/prosemasters-skill/prompts/self_builder.md",
-    "/Users/Leo/Documents/prosemasters-skill/prompts/persona_builder.md",
-    "/Users/Leo/Documents/prosemasters-skill/prompts/merger.md",
-    "/Users/Leo/Documents/prosemasters-skill/prompts/critique_handler.md"
+    "prompts/intake.md",
+    "prompts/memory_analyzer.md",
+    "prompts/literary_persona_analyzer.md",
+    "prompts/self_builder.md",
+    "prompts/persona_builder.md",
+    "prompts/merger.md",
+    "prompts/critique_handler.md"
   ],
   "created_at": "2026-04-10T03:56:50.119380+00:00",
   "updated_at": "2026-04-10T03:56:50.119441+00:00"
