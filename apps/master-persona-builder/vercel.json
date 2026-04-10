@@ -1,6 +1,12 @@
 {
   "functions": {
-    "api/*.py": {
+    "api/generate.py": {
+      "runtime": "python3.12"
+    },
+    "api/validate.py": {
+      "runtime": "python3.12"
+    },
+    "api/health.py": {
       "runtime": "python3.12"
     }
   }
