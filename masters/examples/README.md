@@ -4,6 +4,8 @@ This directory stores tracked snapshots for curated examples.
 
 - `su-shi/`
 - `han-yu/`
+- `shakespeare/`
+- `hemingway/`
 
 Each example includes:
 - `package/` canonical files generated under `masters/{slug}`

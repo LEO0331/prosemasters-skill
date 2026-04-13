@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "source_count": 4,
+  "sources": [
+    {
+      "citation_id": "SRC-SHAKESPEARE-WORKS",
+      "path": "examples/fixtures/shakespeare/works.txt",
+      "chars": 128,
+      "content_hash": "sha-works-001",
+      "excerpt": "Hamlet, Macbeth, King Lear, Othello, The Tempest, selected sonnets; core passages on ambition, mortality, and theatricality."
+    },
+    {
+      "citation_id": "SRC-SHAKESPEARE-CRITIC",
+      "path": "examples/fixtures/shakespeare/criticism.txt",
+      "chars": 113,
+      "content_hash": "sha-crit-001",
+      "excerpt": "Critical notes on rhetorical antithesis, dramatic irony, and character interiority in Renaissance stagecraft."
+    },
+    {
+      "citation_id": "SRC-SHAKESPEARE-LETTERS",
+      "path": "examples/fixtures/shakespeare/contextual-letters.txt",
+      "chars": 96,
+      "content_hash": "sha-let-001",
+      "excerpt": "Company records and dedications used as proxy social voice context where direct correspondence is scarce."
+    },
+    {
+      "citation_id": "SRC-SHAKESPEARE-BIO",
+      "path": "examples/fixtures/shakespeare/biography.csv",
+      "chars": 104,
+      "content_hash": "sha-bio-001",
+      "excerpt": "Stratford birth, London theater years, Globe period, late romances, and retirement timeline."
+    }
+  ]
+}

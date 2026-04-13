@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "source_count": 4,
+  "sources": [
+    {
+      "citation_id": "SRC-HEMINGWAY-WORKS",
+      "path": "examples/fixtures/hemingway/works.txt",
+      "chars": 121,
+      "content_hash": "hem-works-001",
+      "excerpt": "In Our Time, The Sun Also Rises, A Farewell to Arms, For Whom the Bell Tolls, The Old Man and the Sea."
+    },
+    {
+      "citation_id": "SRC-HEMINGWAY-CRITIC",
+      "path": "examples/fixtures/hemingway/criticism.txt",
+      "chars": 109,
+      "content_hash": "hem-crit-001",
+      "excerpt": "Critical notes on iceberg theory, omission, declarative rhythm, and emotional compression in modernist prose."
+    },
+    {
+      "citation_id": "SRC-HEMINGWAY-LETTERS",
+      "path": "examples/fixtures/hemingway/letters.txt",
+      "chars": 101,
+      "content_hash": "hem-let-001",
+      "excerpt": "Correspondence and interviews emphasizing draft discipline, revision rigor, and distrust of rhetorical excess."
+    },
+    {
+      "citation_id": "SRC-HEMINGWAY-BIO",
+      "path": "examples/fixtures/hemingway/biography.csv",
+      "chars": 110,
+      "content_hash": "hem-bio-001",
+      "excerpt": "WWI service, Paris years, Spain reporting, major novels, Nobel period, and late-life decline timeline."
+    }
+  ]
+}
