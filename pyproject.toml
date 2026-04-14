@@ -5,3 +5,26 @@ description = "Monorepo metadata for Vercel Python build compatibility."
 requires-python = ">=3.11"
 dependencies = []
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+branch = true
+source = [
+  "tools",
+  "apps/master-persona-builder/api",
+]
+omit = [
+  "apps/master-persona-builder/api/generate.py",
+  "apps/master-persona-builder/api/health.py",
+  "apps/master-persona-builder/api/validate.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+fail_under = 90
+exclude_also = [
+  "if __name__ == .__main__.:",
+]
