@@ -1,0 +1,130 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - paragraph [ref=e5]: 數位文脈工坊
+      - button "EN" [ref=e6] [cursor=pointer]
+    - heading "世界文豪人格生成器" [level=1] [ref=e7]
+    - paragraph [ref=e8]:
+      - text: 以表單或自訂 JSON 生成
+      - code [ref=e9]: SKILL.md
+      - text: 與
+      - code [ref=e10]: wiki.md
+      - text: 。
+  - generic [ref=e11]:
+    - heading "核心欄位" [level=2] [ref=e12]
+    - paragraph [ref=e13]: 定義作家身份與元資料，可同時適用東方與西方文豪人格。
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - text: 代號 Slug
+        - textbox "代號 Slug" [ref=e16]:
+          - /placeholder: han-yu
+      - generic [ref=e17]:
+        - text: 名稱
+        - textbox "名稱" [ref=e18]:
+          - /placeholder: 莎士比亞
+      - generic [ref=e19]:
+        - text: 描述
+        - textbox "描述" [ref=e20]:
+          - /placeholder: 高擬真文學人格
+      - generic [ref=e21]:
+        - text: 版本
+        - textbox "版本" [ref=e22]: 1.0.0
+      - generic [ref=e23]:
+        - text: 顯示名稱
+        - textbox "顯示名稱" [ref=e24]:
+          - /placeholder: 莎士比亞
+      - generic [ref=e25]:
+        - text: 時代 / 年代
+        - textbox "時代 / 年代" [ref=e26]:
+          - /placeholder: 伊莉莎白時代
+      - generic [ref=e27]:
+        - text: 傳統 / 流派
+        - textbox "傳統 / 流派" [ref=e28]:
+          - /placeholder: 英國文藝復興戲劇
+    - generic [ref=e29]:
+      - text: 歷史文化脈絡
+      - textbox "歷史文化脈絡" [ref=e30]
+    - generic [ref=e31]:
+      - text: 精神核心
+      - textbox "精神核心" [ref=e32]
+  - generic [ref=e33]:
+    - heading "進階陣列（每行一筆）" [level=2] [ref=e34]
+    - paragraph [ref=e35]: 每行視為一筆結構化資料，用於提升記憶與人格擬真度。
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - text: 核心價值
+        - textbox "核心價值" [ref=e38]
+      - generic [ref=e39]:
+        - text: 生平節點
+        - textbox "生平節點" [ref=e40]
+      - generic [ref=e41]:
+        - text: L1 硬性規則
+        - textbox "L1 硬性規則" [ref=e42]
+      - generic [ref=e43]:
+        - text: L3 表達風格
+        - textbox "L3 表達風格" [ref=e44]
+      - generic [ref=e45]:
+        - text: 判斷階梯
+        - textbox "判斷階梯" [ref=e46]
+      - generic [ref=e47]:
+        - text: 語氣錨點
+        - textbox "語氣錨點" [ref=e48]
+  - generic [ref=e49]:
+    - heading "自訂 JSON" [level=2] [ref=e50]
+    - paragraph [ref=e51]: 可匯入或匯出完整 JSON 載荷，方便重現與版本管理。
+    - textbox "貼上自訂 JSON..." [ref=e52]
+    - generic [ref=e53]:
+      - button "由表單載入 JSON" [ref=e54] [cursor=pointer]
+      - button "將 JSON 套用到表單" [ref=e55] [cursor=pointer]
+      - button "下載 JSON" [ref=e56] [cursor=pointer]
+  - generic [ref=e57]:
+    - heading "來源素材路由" [level=2] [ref=e58]
+    - paragraph [ref=e59]: 為每份來源分類，讓後端自動判定抽取工具。
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - text: 分類
+          - combobox "分類" [ref=e64]:
+            - option "作品" [selected]
+            - option "評點"
+            - option "書信"
+            - option "傳記"
+            - option "引文"
+        - generic [ref=e65]:
+          - text: 標題
+          - textbox "標題" [ref=e66]:
+            - /placeholder: 來源標題
+      - generic [ref=e67]:
+        - text: 內容
+        - textbox "內容" [ref=e68]:
+          - /placeholder: 貼上來源文本或 CSV 內容
+      - button "移除" [ref=e70] [cursor=pointer]
+    - button "新增來源" [ref=e72] [cursor=pointer]
+  - generic [ref=e73]:
+    - heading "生成輸出" [level=2] [ref=e74]
+    - paragraph [ref=e75]: 選擇要生成的格式。
+    - generic [ref=e76]:
+      - text: API 金鑰（若伺服器啟用保護）
+      - textbox "API 金鑰（若伺服器啟用保護）" [ref=e77]:
+        - /placeholder: 若伺服器啟用 MPB_API_KEY，請在此輸入
+    - generic [ref=e78]:
+      - button "生成 SKILL.md" [ref=e79] [cursor=pointer]
+      - button "生成 wiki.md" [ref=e80] [cursor=pointer]
+    - heading "SKILL.md" [level=3] [ref=e81]
+    - textbox [ref=e82]
+    - generic [ref=e83]:
+      - button "複製" [ref=e84] [cursor=pointer]
+      - button "下載" [ref=e85] [cursor=pointer]
+  - generic [ref=e87]:
+    - heading "工具路由預覽" [level=2] [ref=e88]
+    - paragraph [ref=e89]: 顯示規劃路由與每個工具步驟的實際執行紀錄。
+    - table [ref=e92]:
+      - rowgroup [ref=e93]:
+        - row "步驟 工具 狀態 代碼 耗時（毫秒） 日誌" [ref=e94]:
+          - columnheader "步驟" [ref=e95]
+          - columnheader "工具" [ref=e96]
+          - columnheader "狀態" [ref=e97]
+          - columnheader "代碼" [ref=e98]
+          - columnheader "耗時（毫秒）" [ref=e99]
+          - columnheader "日誌" [ref=e100]
+      - rowgroup

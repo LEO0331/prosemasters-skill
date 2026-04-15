@@ -431,6 +431,16 @@ async function postJson(path, payload) {
   return data;
 }
 
+function resolvePayloadForGenerate() {
+  const raw = (jsonInput.value || "").trim();
+  if (!raw) {
+    const payload = toPayloadFromForm();
+    jsonInput.value = JSON.stringify(payload, null, 2);
+    return payload;
+  }
+  return JSON.parse(raw);
+}
+
 function download(name, content) {
   const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -459,7 +469,7 @@ function showOutput(kind) {
 
 async function onGenerate(kind) {
   try {
-    const payload = JSON.parse(jsonInput.value || "{}");
+    const payload = resolvePayloadForGenerate();
     const res = await postJson("/api/generate", payload);
     lastGenerated = res;
     toolPlanOut.textContent = JSON.stringify(

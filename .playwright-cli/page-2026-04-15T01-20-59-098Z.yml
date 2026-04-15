@@ -1,0 +1,190 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - paragraph [ref=e5]: Digital Lineage Studio
+      - button "繁中" [ref=e101] [cursor=pointer]
+    - heading "World Author Persona Builder" [level=1] [ref=e102]
+    - paragraph [ref=e8]:
+      - text: Generate
+      - code [ref=e103]: SKILL.md
+      - text: and
+      - code [ref=e104]: wiki.md
+      - text: from form input or custom JSON.
+  - generic [ref=e11]:
+    - heading "Core Fields" [level=2] [ref=e105]
+    - paragraph [ref=e13]: Define author identity and metadata for both Eastern and Western literary personas.
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - text: Slug
+        - textbox "Slug" [ref=e106]:
+          - /placeholder: han-yu
+          - text: shakespeare
+      - generic [ref=e17]:
+        - text: Name
+        - textbox "Name" [ref=e107]:
+          - /placeholder: William Shakespeare
+          - text: William Shakespeare
+      - generic [ref=e19]:
+        - text: Description
+        - textbox "Description" [ref=e108]:
+          - /placeholder: High-fidelity literary persona
+          - text: High-fidelity western literary persona
+      - generic [ref=e21]:
+        - text: Version
+        - textbox "Version" [ref=e109]: 1.0.0
+      - generic [ref=e23]:
+        - text: Display Name
+        - textbox "Display Name" [ref=e110]:
+          - /placeholder: Shakespeare
+          - text: Shakespeare
+      - generic [ref=e25]:
+        - text: Era / Period
+        - textbox "Era / Period" [ref=e111]:
+          - /placeholder: Elizabethan England
+          - text: Elizabethan England
+      - generic [ref=e27]:
+        - text: Tradition / Movement
+        - textbox "Tradition / Movement" [ref=e112]:
+          - /placeholder: English Renaissance Drama
+          - text: English Renaissance Drama
+    - generic [ref=e29]:
+      - text: Historical-Cultural Context
+      - textbox "Historical-Cultural Context" [ref=e113]: English playwright of late 16th and early 17th century
+    - generic [ref=e31]:
+      - text: Core Philosophy
+      - textbox "Core Philosophy" [ref=e114]: Dramatic irony with layered rhetoric
+  - generic [ref=e33]:
+    - heading "Advanced Arrays (one item per line)" [level=2] [ref=e115]
+    - paragraph [ref=e35]: Each line becomes one structured item in memory/persona to improve fidelity.
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - text: Core Values
+        - textbox "Core Values" [ref=e116]: Moral ambiguity\nSpeech as action
+      - generic [ref=e39]:
+        - text: Timeline Milestones
+        - textbox "Timeline Milestones" [ref=e117]
+      - generic [ref=e41]:
+        - text: L1 Hard Rules
+        - textbox "L1 Hard Rules" [ref=e118]: No modern slang
+      - generic [ref=e43]:
+        - text: L3 Expression Style
+        - textbox "L3 Expression Style" [ref=e119]
+      - generic [ref=e45]:
+        - text: Decision Ladder
+        - textbox "Decision Ladder" [ref=e120]
+      - generic [ref=e47]:
+        - text: Voice Anchors
+        - textbox "Voice Anchors" [ref=e121]
+  - generic [ref=e49]:
+    - heading "Custom JSON" [level=2] [ref=e122]
+    - paragraph [ref=e51]: Use JSON mode to import/export full payloads for reproducible generation.
+    - textbox "Paste custom JSON here..." [ref=e123]: "{ \"meta\": { \"slug\": \"shakespeare\", \"name\": \"William Shakespeare\", \"description\": \"High-fidelity western literary persona\", \"version\": \"1.0.0\", \"language\": \"en\", \"target_platforms\": [ \"claude\", \"codex\" ] }, \"master\": { \"display_name\": \"Shakespeare\", \"dynasty\": \"Elizabethan England\", \"titles\": [], \"historical_context\": \"English playwright of late 16th and early 17th century\", \"literary_school\": \"English Renaissance Drama\", \"core_philosophy\": \"Dramatic irony with layered rhetoric\" }, \"memory\": { \"core_values\": [ \"Moral ambiguity\\\\nSpeech as action\" ], \"intellectual_axes\": [], \"worldview_tensions\": [], \"preferred_themes\": [], \"emotional_signature\": [], \"timeline_milestones\": [], \"geography_path\": [], \"relationships\": [], \"voice_anchors\": [], \"anachronism_policy\": [], \"citation_ids\": [] }, \"persona\": { \"l1_hard_rules\": [ \"No modern slang\" ], \"l2_identity_role\": [], \"l3_expression_style\": [], \"lexicon_preferences\": [], \"rhythm_structure\": [], \"l4_judgment_logic\": [], \"decision_ladder\": [], \"l5_social_conduct\": [], \"audience_tone\": [], \"anti_patterns\": [], \"rewrite_strategies\": [] }, \"commands\": { \"trigger\": \"/distill-master\", \"update\": \"/update-master {slug}\", \"list\": \"/list-masters\", \"delete\": \"/delete-master {slug}\" }, \"source_materials\": [ { \"category\": \"works\", \"title\": \"Hamlet excerpt\", \"content\": \"To be, or not to be, that is the question.\" } ] }"
+    - generic [ref=e53]:
+      - button "Load JSON from Form" [ref=e124] [cursor=pointer]
+      - button "Apply JSON to Form" [ref=e125] [cursor=pointer]
+      - button "Download JSON" [ref=e126] [cursor=pointer]
+  - generic [ref=e57]:
+    - heading "Source Materials Routing" [level=2] [ref=e127]
+    - paragraph [ref=e59]: Categorize each source so backend can decide extraction tools automatically.
+    - generic [ref=e128]:
+      - generic [ref=e129]:
+        - generic [ref=e130]:
+          - text: Category
+          - combobox "Category" [ref=e131]:
+            - option "Works" [selected]
+            - option "Criticism"
+            - option "Letters"
+            - option "Biography"
+            - option "Citation"
+        - generic [ref=e132]:
+          - text: Title
+          - textbox "Title" [ref=e133]:
+            - /placeholder: source title
+            - text: Hamlet excerpt
+      - generic [ref=e134]:
+        - text: Content
+        - textbox "Content" [ref=e135]:
+          - /placeholder: paste source text or csv lines
+          - text: To be, or not to be, that is the question.
+      - button "Remove" [ref=e137] [cursor=pointer]
+    - button "Add Source" [ref=e138] [cursor=pointer]
+  - generic [ref=e73]:
+    - heading "Generated Output" [level=2] [ref=e139]
+    - paragraph [ref=e75]: Choose one target format to generate. Both use the same backend pipeline and output panel.
+    - generic [ref=e76]:
+      - text: API Key (optional for protected API)
+      - textbox "API Key (optional for protected API)" [ref=e140]:
+        - /placeholder: Set if MPB_API_KEY is enabled on server
+    - generic [ref=e78]:
+      - button "Generate SKILL.md" [ref=e141] [cursor=pointer]
+      - button "Generate wiki.md" [active] [ref=e142] [cursor=pointer]
+    - heading "wiki.md" [level=3] [ref=e204]
+    - textbox [ref=e82]: "# Shakespeare (shakespeare) ## Overview - Name: William Shakespeare - Dynasty: Elizabethan England - Description: High-fidelity western literary persona - Historical context: English playwright of late 16th and early 17th century ## Memory ### Core Values - Moral ambiguity\\nSpeech as action ### Timeline Milestones - N/A ### Voice Anchors - N/A ## Persona ### L1 Hard Rules - No modern slang ### Style - N/A ### Decision Ladder - N/A"
+    - generic [ref=e83]:
+      - button "Copy" [ref=e143] [cursor=pointer]
+      - button "Download" [ref=e144] [cursor=pointer]
+    - generic [ref=e86]: "Generation completed { \"warnings\": [] }"
+  - generic [ref=e87]:
+    - heading "Tool Routing Preview" [level=2] [ref=e145]
+    - paragraph [ref=e89]: Shows planned extraction routes and real execution logs for each tool step.
+    - generic [ref=e90]: "{ \"mode\": \"repo-tools\", \"routes\": [ { \"category\": \"works\", \"title\": \"Hamlet excerpt\", \"tools\": [ \"tools/literature_parser.py\", \"tools/meter_analyzer.py\" ] } ] }"
+    - table [ref=e92]:
+      - rowgroup [ref=e93]:
+        - row "Step Tool Status Exit Duration (ms) Logs" [ref=e146]:
+          - columnheader "Step" [ref=e147]
+          - columnheader "Tool" [ref=e148]
+          - columnheader "Status" [ref=e149]
+          - columnheader "Exit" [ref=e150]
+          - columnheader "Duration (ms)" [ref=e151]
+          - columnheader "Logs" [ref=e152]
+      - rowgroup [ref=e153]:
+        - row "parse_textual_corpus /Users/Leo/Documents/prosemasters-skill/tools/literature_parser.py success 0 55 -" [ref=e205]:
+          - cell "parse_textual_corpus" [ref=e206]
+          - cell "/Users/Leo/Documents/prosemasters-skill/tools/literature_parser.py" [ref=e207]
+          - cell "success" [ref=e208]:
+            - generic [ref=e209]: success
+          - cell "0" [ref=e210]
+          - cell "55" [ref=e211]
+          - cell "-" [ref=e212]
+        - row "analyze_meter /Users/Leo/Documents/prosemasters-skill/tools/meter_analyzer.py success 0 42 -" [ref=e213]:
+          - cell "analyze_meter" [ref=e214]
+          - cell "/Users/Leo/Documents/prosemasters-skill/tools/meter_analyzer.py" [ref=e215]
+          - cell "success" [ref=e216]:
+            - generic [ref=e217]: success
+          - cell "0" [ref=e218]
+          - cell "42" [ref=e219]
+          - cell "-" [ref=e220]
+        - row "map_biography tools/biography_mapper.py skipped - -" [ref=e221]:
+          - cell "map_biography" [ref=e222]
+          - cell "tools/biography_mapper.py" [ref=e223]
+          - cell "skipped" [ref=e224]:
+            - generic [ref=e225]: skipped
+          - cell "-" [ref=e226]
+          - cell "-" [ref=e227]
+          - cell [ref=e228]:
+            - group [ref=e229]:
+              - generic "view logs" [ref=e230] [cursor=pointer]
+        - row "build_citations /Users/Leo/Documents/prosemasters-skill/tools/citation_manager.py success 0 40 -" [ref=e231]:
+          - cell "build_citations" [ref=e232]
+          - cell "/Users/Leo/Documents/prosemasters-skill/tools/citation_manager.py" [ref=e233]
+          - cell "success" [ref=e234]:
+            - generic [ref=e235]: success
+          - cell "0" [ref=e236]
+          - cell "40" [ref=e237]
+          - cell "-" [ref=e238]
+        - row "build_master_package /Users/Leo/Documents/prosemasters-skill/tools/skill_writer.py success 0 41 -" [ref=e239]:
+          - cell "build_master_package" [ref=e240]
+          - cell "/Users/Leo/Documents/prosemasters-skill/tools/skill_writer.py" [ref=e241]
+          - cell "success" [ref=e242]:
+            - generic [ref=e243]: success
+          - cell "0" [ref=e244]
+          - cell "41" [ref=e245]
+          - cell "-" [ref=e246]
+        - row "export_runtime_package /Users/Leo/Documents/prosemasters-skill/tools/skill_writer.py success 0 41 -" [ref=e247]:
+          - cell "export_runtime_package" [ref=e248]
+          - cell "/Users/Leo/Documents/prosemasters-skill/tools/skill_writer.py" [ref=e249]
+          - cell "success" [ref=e250]:
+            - generic [ref=e251]: success
+          - cell "0" [ref=e252]
+          - cell "41" [ref=e253]
+          - cell "-" [ref=e254]

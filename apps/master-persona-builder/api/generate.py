@@ -26,6 +26,16 @@ from _lib import (
 )
 
 
+def _display_tool_name(raw: str, cwd: Path) -> str:
+    p = Path(raw)
+    if p.is_absolute():
+        try:
+            return str(p.resolve().relative_to(cwd.resolve()))
+        except ValueError:
+            return p.name or raw
+    return raw
+
+
 def _exec_cmd(cmd: list[str], cwd: Path, step: str, must_succeed: bool = False) -> dict[str, Any]:
     t0 = time.time()
     timeout_sec = int(os.getenv("MPB_SUBPROCESS_TIMEOUT_SEC", "25"))
@@ -55,7 +65,7 @@ def _exec_cmd(cmd: list[str], cwd: Path, step: str, must_succeed: bool = False) 
 
     rec = {
         "step": step,
-        "tool": cmd[1] if len(cmd) > 1 else cmd[0],
+        "tool": _display_tool_name(cmd[1] if len(cmd) > 1 else cmd[0], cwd),
         "status": "success" if cp.returncode == 0 else "failed",
         "exit_code": cp.returncode,
         "duration_ms": int((time.time() - t0) * 1000),
