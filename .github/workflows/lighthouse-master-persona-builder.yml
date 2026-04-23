@@ -1,0 +1,62 @@
+name: Lighthouse Master Persona Builder
+
+on:
+  pull_request:
+    paths:
+      - "apps/master-persona-builder/**"
+      - ".github/workflows/lighthouse-master-persona-builder.yml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/master-persona-builder/**"
+      - ".github/workflows/lighthouse-master-persona-builder.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: lighthouse-master-persona-builder-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run Lighthouse CI (temporary public storage)
+        run: |
+          npx -y @lhci/cli@0.15.1 autorun \
+            --config=apps/master-persona-builder/lighthouserc.json | tee lighthouse.log
+
+      - name: Extract temporary dashboard URLs
+        if: always()
+        run: |
+          grep -Eo 'https://storage.googleapis.com/lighthouse-infrastructure.appspot.com[^ ]+' lighthouse.log | sort -u > lighthouse-urls.txt || true
+
+          {
+            echo "## Lighthouse Temporary Public Reports"
+            if [ -s lighthouse-urls.txt ]; then
+              while IFS= read -r url; do
+                echo "- $url"
+              done < lighthouse-urls.txt
+            else
+              echo "- No temporary URL extracted from logs. See artifact: lighthouse.log"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Lighthouse artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-master-persona-builder
+          path: |
+            lighthouse.log
+            lighthouse-urls.txt
+            .lighthouseci/
