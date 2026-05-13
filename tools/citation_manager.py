@@ -14,6 +14,16 @@ def digest(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:12]
 
 
+def display_path(path: Path, root: Path | None = None) -> str:
+    resolved = path.resolve()
+    if root is None:
+        root = Path.cwd().resolve()
+    try:
+        return str(resolved.relative_to(root))
+    except ValueError:
+        return resolved.name
+
+
 def build_manifest(files: list[Path], excerpt_chars: int) -> dict:
     entries = []
     for path in files:
@@ -22,7 +32,7 @@ def build_manifest(files: list[Path], excerpt_chars: int) -> dict:
         entries.append(
             {
                 "citation_id": cid,
-                "path": str(path),
+                "path": display_path(path),
                 "chars": len(text),
                 "content_hash": digest(text),
                 "excerpt": text[:excerpt_chars],

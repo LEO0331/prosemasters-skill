@@ -17,6 +17,16 @@ def test_digest_and_manifest(tmp_path: Path) -> None:
     assert manifest["source_count"] == 2
     assert manifest["sources"][0]["excerpt"] == "alp"
     assert manifest["sources"][0]["citation_id"].startswith("SRC-")
+    assert manifest["sources"][0]["path"] == "a.txt"
+
+
+def test_display_path_relative_and_sanitized(tmp_path: Path) -> None:
+    nested = tmp_path / "nested" / "c.txt"
+    nested.parent.mkdir()
+    nested.write_text("gamma", encoding="utf-8")
+
+    assert citation_manager.display_path(nested, tmp_path) == "nested/c.txt"
+    assert citation_manager.display_path(nested, tmp_path / "elsewhere") == "c.txt"
 
 
 def test_main_success_and_missing(tmp_path: Path, monkeypatch, capsys) -> None:

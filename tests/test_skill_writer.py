@@ -69,6 +69,8 @@ def test_helpers_render_and_meta_sources(tmp_path: Path) -> None:
     assert "## L1 Hard Rules" in persona_md
     assert meta["slug"] == "slug-a"
     assert len(meta["prompt_contract"]) == 7
+    assert all(not Path(p).is_absolute() for p in meta["prompt_contract"])
+    assert meta["prompt_contract"][0] == "prompts/intake.md"
     assert sources["source_count"] == 1
 
 
@@ -156,4 +158,3 @@ def test_runtime_skill_markdown() -> None:
     md = skill_writer.runtime_skill_markdown("slug-a", "Name A")
     assert "name: slug-a" in md
     assert "# Name A" in md
-

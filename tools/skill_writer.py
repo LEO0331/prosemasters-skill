@@ -181,6 +181,18 @@ def render_persona_md(profile: dict[str, Any], persona: dict[str, Any]) -> str:
 def build_meta(profile: dict[str, Any], slug: str) -> dict[str, Any]:
     name = profile.get("name", slug)
     dynasty = profile.get("dynasty", "Unknown")
+    prompt_contract = [
+        f"prompts/{name}"
+        for name in [
+            "intake.md",
+            "memory_analyzer.md",
+            "literary_persona_analyzer.md",
+            "self_builder.md",
+            "persona_builder.md",
+            "merger.md",
+            "critique_handler.md",
+        ]
+    ]
     return {
         "slug": slug,
         "name": name,
@@ -196,15 +208,7 @@ def build_meta(profile: dict[str, Any], slug: str) -> dict[str, Any]:
             "modern_topic_strategy": "analogy_to_historical_categories",
             "reject_ahistorical_slang": True,
         },
-        "prompt_contract": [
-            str(PROMPTS_DIR / "intake.md"),
-            str(PROMPTS_DIR / "memory_analyzer.md"),
-            str(PROMPTS_DIR / "literary_persona_analyzer.md"),
-            str(PROMPTS_DIR / "self_builder.md"),
-            str(PROMPTS_DIR / "persona_builder.md"),
-            str(PROMPTS_DIR / "merger.md"),
-            str(PROMPTS_DIR / "critique_handler.md"),
-        ],
+        "prompt_contract": prompt_contract,
         "created_at": now_iso(),
         "updated_at": now_iso(),
     }
