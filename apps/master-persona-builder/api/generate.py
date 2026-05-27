@@ -14,6 +14,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _lib import (
+    SOURCE_CATEGORIES,
     normalize_payload,
     read_json_body,
     reject_forbidden_origin,
@@ -99,13 +100,7 @@ def build_tool_plan(data: dict) -> dict:
 
 
 def _write_source_files(work: Path, source_materials: list[dict[str, Any]]) -> dict[str, list[Path]]:
-    categorized: dict[str, list[Path]] = {
-        "works": [],
-        "criticism": [],
-        "letters": [],
-        "biography": [],
-        "citation": [],
-    }
+    categorized: dict[str, list[Path]] = {category: [] for category in SOURCE_CATEGORIES}
     for i, item in enumerate(source_materials):
         category = str(item.get("category", "works")).strip().lower()
         if category not in categorized:

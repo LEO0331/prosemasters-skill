@@ -4,6 +4,7 @@
 [![Security Guardrails](https://img.shields.io/badge/Security-CORS%20%2B%20API%20Key%20%2B%20Limits-0a7f5a)](#notes)
 [![CI](https://img.shields.io/badge/GitHub%20Actions-Security%20%2F%20Test-1f6feb)](../../.github/workflows/deploy-master-persona-builder.yml)
 [![Lighthouse CI](https://img.shields.io/badge/Lighthouse-CI%20Temp%20Dashboard-2ea44f)](../../.github/workflows/lighthouse-master-persona-builder.yml)
+[![Playwright E2E](https://img.shields.io/badge/Playwright-E2E%20Flow-45ba63)](#end-to-end-testing)
 
 This app is isolated from existing repository functionality.
 
@@ -35,6 +36,8 @@ Send `source_materials[]` with:
 - `api/*.py`: Vercel Python Functions
 - `shared/schema.json`: JSON schema reference
 - `shared/examples/master.example.json`: starter payload
+- `scripts/local_test_server.py`: local test server for browser e2e
+- `e2e/*.spec.js`: Playwright end-to-end flows
 
 ## Deploy on Vercel
 1. Import repository into Vercel
@@ -53,3 +56,19 @@ Send `source_materials[]` with:
 - Workflow: `.github/workflows/lighthouse-master-persona-builder.yml`
 - It runs LHCI against `apps/master-persona-builder` and uploads to `temporary-public-storage`.
 - After each run, open GitHub Action `Summary` to get report links; full logs and `.lighthouseci/` are in workflow artifacts.
+
+## End-to-end testing
+1. Install Playwright test dependency:
+   ```bash
+   cd apps/master-persona-builder
+   npm install
+   npx playwright install chromium
+   ```
+2. Run the e2e suite:
+   ```bash
+   npm run test:e2e
+   ```
+
+The suite proves two browser-level boundaries:
+- Success path: form input -> `/api/generate` -> repo tools/template render -> `SKILL.md` and `wiki.md` output
+- Failure path: invalid JSON payload -> backend validation -> user-visible error message

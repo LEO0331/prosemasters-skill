@@ -9,6 +9,33 @@ from typing import Any
 from urllib.parse import urlparse
 
 SLUG_RE = re.compile(r"^[a-z0-9-]+$")
+MEMORY_FIELDS = (
+    "core_values",
+    "intellectual_axes",
+    "worldview_tensions",
+    "preferred_themes",
+    "emotional_signature",
+    "timeline_milestones",
+    "geography_path",
+    "relationships",
+    "voice_anchors",
+    "anachronism_policy",
+    "citation_ids",
+)
+PERSONA_FIELDS = (
+    "l1_hard_rules",
+    "l2_identity_role",
+    "l3_expression_style",
+    "lexicon_preferences",
+    "rhythm_structure",
+    "l4_judgment_logic",
+    "decision_ladder",
+    "l5_social_conduct",
+    "audience_tone",
+    "anti_patterns",
+    "rewrite_strategies",
+)
+SOURCE_CATEGORIES = ("works", "criticism", "letters", "biography", "citation")
 
 
 def _allowed_origins() -> set[str]:
@@ -147,16 +174,8 @@ def normalize_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "literary_school": str(master.get("literary_school", "")).strip(),
             "core_philosophy": str(master.get("core_philosophy", "")).strip(),
         },
-        "memory": {k: normalize_array(memory.get(k)) for k in [
-            "core_values", "intellectual_axes", "worldview_tensions", "preferred_themes",
-            "emotional_signature", "timeline_milestones", "geography_path", "relationships",
-            "voice_anchors", "anachronism_policy", "citation_ids",
-        ]},
-        "persona": {k: normalize_array(persona.get(k)) for k in [
-            "l1_hard_rules", "l2_identity_role", "l3_expression_style", "lexicon_preferences",
-            "rhythm_structure", "l4_judgment_logic", "decision_ladder", "l5_social_conduct",
-            "audience_tone", "anti_patterns", "rewrite_strategies",
-        ]},
+        "memory": {k: normalize_array(memory.get(k)) for k in MEMORY_FIELDS},
+        "persona": {k: normalize_array(persona.get(k)) for k in PERSONA_FIELDS},
         "commands": {
             "trigger": str(commands.get("trigger", "/distill-master")).strip() or "/distill-master",
             "update": str(commands.get("update", "/update-master {slug}")).strip() or "/update-master {slug}",
@@ -199,7 +218,7 @@ def validate_payload(payload: dict[str, Any]) -> list[str]:
     if not str(master.get("display_name", "")).strip():
         errors.append("master.display_name is required")
 
-    allowed_categories = {"works", "criticism", "letters", "biography", "citation"}
+    allowed_categories = set(SOURCE_CATEGORIES)
     max_source_items = int(os.getenv("MPB_MAX_SOURCE_ITEMS", "24"))
     max_source_chars = int(os.getenv("MPB_MAX_SOURCE_CHARS", "30000"))
     max_total_source_chars = int(os.getenv("MPB_MAX_TOTAL_SOURCE_CHARS", "200000"))

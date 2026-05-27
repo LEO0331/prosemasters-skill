@@ -140,6 +140,9 @@ def test_normalize_payload_and_helpers() -> None:
     assert normalized["source_materials"][0]["title"] == "t"
     assert _lib.normalize_array("a\nb") == ["a", "b"]
     assert "fallback" in _lib._bullets([], "fallback")
+    assert set(normalized["memory"]) == set(_lib.MEMORY_FIELDS)
+    assert set(normalized["persona"]) == set(_lib.PERSONA_FIELDS)
+    assert tuple(_lib.SOURCE_CATEGORIES) == ("works", "criticism", "letters", "biography", "citation")
 
 
 def test_render_helpers_and_repo_root(tmp_path: Path) -> None:
@@ -162,4 +165,3 @@ def test_render_helpers_and_repo_root(tmp_path: Path) -> None:
     (root / "tools").mkdir(parents=True)
     (root / "tools" / "skill_writer.py").write_text("# x\n", encoding="utf-8")
     assert _lib.repo_root_from_api_file(api_file) == root.resolve()
-
